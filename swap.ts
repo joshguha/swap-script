@@ -50,7 +50,10 @@ async function main() {
 
   const deadline = Math.floor(Date.now() / 1000) + 600;
 
-  const tx = await vault.swap(singleSwap, funds, limit, deadline);
+  const tx = await vault.swap(singleSwap, funds, limit, deadline, {
+    gasPrice: 200 * 1e9, // 200 Gwei
+  });
+  await tx.wait(2);
 
   console.log("SWAP SUCCESSFUL");
   console.log("TX hash: ", tx.hash);
